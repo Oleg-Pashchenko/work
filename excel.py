@@ -23,14 +23,14 @@ def read_file(filename: str):
     workbook = openpyxl.load_workbook(filename)
     worksheet = workbook.active
     ids = []
-    for i in range(0, 3):#worksheet.max_row):
+    for i in range(0, worksheet.max_row):
         for col in worksheet.iter_cols(1, 1):
             ids.append(col[i].value)
     return ids
 
 
 def write_file(result, filename):
-    workbook = openpyxl.load_workbook(filename)
+    workbook = openpyxl.Workbook()
     worksheet = workbook.active
     for row in worksheet['B3:B100000']:
         for cell in row:

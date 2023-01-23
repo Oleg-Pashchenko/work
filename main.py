@@ -9,6 +9,7 @@ import widberries
 def main():
     print("Started!")
     filename = 'Копия Прайслист.xlsx'
+    filename = 'ПарсингBOT (1).xlsx'
     ids = excel.read_file(filename)
     result = []  # recht photo, articul, recht_name, photo_wb, articul_wb, photo_ozon, id_ozon
     a = 0
