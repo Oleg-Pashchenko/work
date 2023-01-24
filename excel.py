@@ -37,27 +37,32 @@ def write_file(result, filename):
             cell.value = None
     diff = 0
     for i in range(1, len(result) + 1):
-        worksheet.column_dimensions['A'].width = 35
-        worksheet.column_dimensions['A'].height = 35
-        img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][0])))
-        img.anchor = f'A{i + 2 + diff}'
-        worksheet.add_image(img)
-        worksheet.cell(row=i + 2 + diff, column=2).value = str(result[i - 1][1])
-        worksheet.cell(row=i + 2 + diff, column=3).value = str(result[i - 1][2])
+        try:
+            img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][0])))
 
+            worksheet.column_dimensions['A'].width = 35
+            worksheet.column_dimensions['A'].height = 35
+            img.anchor = f'A{i + 2 + diff}'
+            worksheet.add_image(img)
+            worksheet.cell(row=i + 2 + diff, column=2).value = str(result[i - 1][1])
+            worksheet.cell(row=i + 2 + diff, column=3).value = str(result[i - 1][2])
+        except:
+            pass
         diff_first = -1
         for z in range(len(result[i - 1][3])):
             if z == 0:
                 diff_first += 1
             else:
                 diff_first += 15
-            worksheet.column_dimensions['D'].width = 35
-            worksheet.column_dimensions['D'].height = 35
-            img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][3][z])))
-            img.anchor = f'D{i + 2 + diff + diff_first}'
-            worksheet.add_image(img)
-            worksheet.cell(row=i + 2 + diff + diff_first, column=5).value = result[i - 1][4][z]
-
+            try:
+                img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][3][z])))
+                worksheet.column_dimensions['D'].width = 35
+                worksheet.column_dimensions['D'].height = 35
+                img.anchor = f'D{i + 2 + diff + diff_first}'
+                worksheet.add_image(img)
+                worksheet.cell(row=i + 2 + diff + diff_first, column=5).value = result[i - 1][4][z]
+            except:
+                pass
 
         diff_second = -1
         for z in range(len(result[i - 1][5])):
@@ -65,12 +70,14 @@ def write_file(result, filename):
                 diff_second += 1
             else:
                 diff_second += 15
-            worksheet.column_dimensions['F'].width = 35
-            worksheet.column_dimensions['F'].height = 35
-            img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][5][z])))
-            img.anchor = f'F{i + 2 + diff + diff_second}'
-            worksheet.add_image(img)
-            worksheet.cell(row=i + 2 + diff + diff_second, column=7).value = result[i - 1][6][z]
-
+            try:
+                img = openpyxl.drawing.image.Image(download_image(str(result[i - 1][5][z])))
+                worksheet.column_dimensions['F'].width = 35
+                worksheet.column_dimensions['F'].height = 35
+                img.anchor = f'F{i + 2 + diff + diff_second}'
+                worksheet.add_image(img)
+                worksheet.cell(row=i + 2 + diff + diff_second, column=7).value = result[i - 1][6][z]
+            except:
+                pass
         diff += max(diff_first, diff_second) + 20  # photo size
     workbook.save("Result.xlsx")
