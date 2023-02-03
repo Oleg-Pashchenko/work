@@ -5,6 +5,7 @@ import db
 import excel
 
 API_TOKEN = '5398420004:AAF1PxwUSTnPPYZCC2hnVpOovMM2YcOTdEc'
+#  TEST_API_TOKEN = "5302029732:AAENrrdfY1-NprXCUd26UA1vbpXy3VUumk8"
 
 bot = aiogram.Bot(token=API_TOKEN)
 dp = aiogram.Dispatcher(bot)
@@ -12,6 +13,7 @@ dp = aiogram.Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def start_message(message):
+    print(message)
     kb = [
         [
             types.KeyboardButton(text="Обработать"),
